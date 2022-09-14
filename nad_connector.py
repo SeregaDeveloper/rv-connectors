@@ -105,24 +105,8 @@ try:
 
 	event_info = get_current_event_info(csrf,id,key,tf,tt)
 	sign = event_info["signature"]
-	try:
-		desc = str(detect)
-	except:
-		desc = " "
-		update_inc(sys.argv[4],sign["rule"],detect,name,sys.argv[1],sys.argv[2],time,desc)
+	desc = str(detect)
+	update_inc(sys.argv[4],sign["rule"],detect,name,sys.argv[1],sys.argv[2],time,desc)
 
-except:
-	events = get_events(csrf,sys.argv[2],sys.argv[1],sys.argv[3],tf,tt)
-	for event in events:
-		name = event[1]
-		detect = event[2]
-		time = event[4].replace("T"," ")
-		id = event[13]
-		key = str(event[15]).split("'")[1].split("\'")[0]
-	event_info = get_current_event_info(csrf,id,key,tf,tt)
-	sign = event_info["signature"]
-	try:
-		desc = str(detect)
-	except:
-		desc = " "
-	update_inc(sys.argv[4],sign["rule"],detect,name,sys.argv[2],sys.argv[1],time,desc)
+except Exception as ex:
+	print(ex)
